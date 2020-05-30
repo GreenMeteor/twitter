@@ -15,7 +15,15 @@ use humhub\models\Setting;
   <div class="panel-body">
 
 <?= Html::beginTag('div') ?>
-<a class="twitter-timeline" href="<?= $twitterUrl; ?>" width="100%" height="500"></a> <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<a class="twitter-timeline" href="<?= $twitterUrl; ?>" width="100%" height="500"></a>
+        <?= Html::beginTag('script', ['id' => 'twttr-js', 'src' => 'https://platform.twitter.com/widgets.js']) ?><?= Html::endTag('script') ?>
+        <script <?= Html::nonce() ?>>
+            $(document).off('humhub:ready.gm_twitter').on('humhub:ready.gm_twitter', function(event ,pjax) {
+                if (pjax && window.__twttr && $('#twttr-js').length) {
+                   __twttr();
+                }
+            });
+        </script>
 <?= Html::endTag('div'); ?>
 
 </div>
