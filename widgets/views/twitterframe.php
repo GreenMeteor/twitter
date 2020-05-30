@@ -22,10 +22,10 @@ Assets::register($this);
 
 <?= Html::beginTag('div') ?>
 <a class="twitter-timeline" href="<?= $twitterUrl; ?>" width="100%" height="500"></a>
-        <?= Html::beginTag('script', ['id' => 'twttr-widgets-js', 'src' => 'https://platform.twitter.com/widgets.js']) ?><?= Html::endTag('script') ?>
+        <?= Html::beginTag('script', ['id' => 'twttr.widgets', 'src' => 'https://platform.twitter.com/widgets.js']) ?><?= Html::endTag('script') ?>
         <script <?= Html::nonce() ?>>
             $(document).off('humhub:ready.gm_twitter').on('humhub:ready.gm_twitter', function(event ,pjax) {
-                if (pjax && window.__twttr.widgets.init && $('#twttr-widgets-js').length) {
+                if (pjax && window.__twttr.widgets.init && $('#twttr.widgets').length) {
                    __twttr.widgets.init();
                 }
             });
