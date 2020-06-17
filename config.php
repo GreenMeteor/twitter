@@ -2,35 +2,20 @@
 
 namespace humhub\modules\twitter;
 
+use humhub\modules\twitter\Module;
+use humhub\modules\twitter\Events;
+use humhub\modules\admin\widgets\AdminMenu;
+use humhub\modules\space\widgets\Sidebar as Space;
+use humhub\modules\dashboard\widgets\Sidebar as Dashboard;
+
 return [
     'id' => 'twitter',
-    'class' => 'humhub\modules\twitter\Module',
+    'class' => Module::class,
     'namespace' => 'humhub\modules\twitter',
     'events' => [
-        [
-            'class' => \humhub\modules\dashboard\widgets\Sidebar::className(),
-            'event' => \humhub\modules\dashboard\widgets\Sidebar::EVENT_INIT,
-            'callback' => [
-                'humhub\modules\twitter\Events',
-                'addTwitterFrame'
-            ]
-        ],
-        [
-            'class' => \humhub\modules\space\widgets\Sidebar::className(),
-            'event' => \humhub\modules\space\widgets\Sidebar::EVENT_INIT,
-            'callback' => [
-                'humhub\modules\twitter\Events',
-                'addTwitterFrame'
-            ]
-        ],
-        [
-            'class' => \humhub\modules\admin\widgets\AdminMenu::className(),
-            'event' => \humhub\modules\admin\widgets\AdminMenu::EVENT_INIT,
-            'callback' => [
-                'humhub\modules\twitter\Events',
-                'onAdminMenuInit'
-            ]
-        ]
+        ['class' => Dashboard::class, 'event' => Dashboard::EVENT_INIT, 'callback' => [Events::class, 'addTwitterFrame']],
+        ['class' => Space::class, 'event' => Space::EVENT_INIT, 'callback' => [Events::class, 'addTwitterFrame']],
+        ['class' => AdminMenu::class, 'event' => AdminMenu::EVENT_INIT, 'callback' => [Events::class, 'onAdminMenuInit']]
     ]
 ];
 ?>
